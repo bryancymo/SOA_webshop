@@ -41,13 +41,21 @@ public class Webshop {
 		List<CartItem> cartItems = webShopController.getCartItems();
         System.out.println("\nCart Items:");
         for (CartItem cartItem : cartItems) {
-            System.out.printf("%s - %d x €%f", cartItem.getProduct().getName(), cartItem.getQuantity(), cartItem.getProduct().getPrice());
+            System.out.printf("%s - %d x €%.2f%n", cartItem.getProduct().getName(), cartItem.getQuantity(), cartItem.getProduct().getPrice());
         }
-        System.out.println("Total Price: $" + webShopController.getTotalPrice());
+        System.out.println("Totale prijs: €" + webShopController.getTotalPrice());
     }
 	
 	public void checkout() {
 		this.webShopController.checkout();
+	}
+	
+	public void login(String username, String password) {
+		this.webShopController.login(username, password);
+	}
+	
+	public void logout() {
+		this.webShopController.logout();
 	}
 
 }

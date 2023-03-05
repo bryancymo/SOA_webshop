@@ -12,20 +12,20 @@ public class CheckoutService {
 		this.cartService = cartService;
 	}
 	
-	public boolean checkout() {
+	public boolean checkout(String currentUser) {
 		
-		List<CartItem> cartItems = cartService.getCartItems();
+		List<CartItem> cartItems = cartService.getCartItems(currentUser);
 		
 		if(cartItems.isEmpty()) {
-			System.out.println("No items in the cart, you cannot checkout");
+			System.out.println("Geen items in de cart");
 			return false;
 		}
 		
-		double totalPrice = cartService.getTotalPrice();
+		double totalPrice = cartService.getTotalPrice(currentUser);
 		
-		cartService.clearCart();
+		cartService.clearCart(currentUser);
 		
-		System.out.printf("Je moet %d betalen", totalPrice);
+		System.out.printf("Je moet €%.2f betalen", totalPrice);
 		
 		return true;
 		
