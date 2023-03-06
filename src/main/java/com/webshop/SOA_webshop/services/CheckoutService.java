@@ -25,7 +25,7 @@ public class CheckoutService {
 		
 		cartService.clearCart(currentUser);
 		
-		System.out.printf("Je moet €%.2f betalen", totalPrice);
+		System.out.printf("Je moet €%.2f betalen%n", totalPrice);
 		
 		return true;
 		
