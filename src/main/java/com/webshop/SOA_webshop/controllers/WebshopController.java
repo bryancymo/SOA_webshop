@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.webshop.SOA_webshop.contents.CartItem;
 import com.webshop.SOA_webshop.contents.Product;
@@ -16,6 +18,7 @@ import com.webshop.SOA_webshop.services.LoginService;
 import com.webshop.SOA_webshop.services.ProductService;
 import com.webshop.SOA_webshop.services.ShippingService;
 
+@RestController
 public class WebshopController {
 	private ProductService productService;
 	private CartService cartService;
@@ -32,14 +35,21 @@ public class WebshopController {
 		this.shippingService = new ShippingService();
 	}
 	
+	@GetMapping("/")
+	public String ping() {
+		return "This works";
+	}
+	
 	@PostMapping("/products")
-	public void addProduct(@RequestBody Product product) {
+	public void addProduct(@RequestBody int id, @RequestBody String productName, @RequestBody double price) {
+		Product product = new Product(id, productName, price);
         productService.addProduct(product);
     }
 
 	@GetMapping("/products")
-    public List<Product> getAllProducts() {
-        return productService.getAllProducts();
+    public String getAllProducts() {
+//        return productService.getAllProducts();
+		return "hello world";
     }
 
 	@GetMapping("products/{id}")
@@ -50,28 +60,28 @@ public class WebshopController {
 	@PostMapping("/carts/{username}/{productId}/{quantity}")
     public void addItemToCart(@PathVariable String username, @PathVariable int productId, @PathVariable int quantity) {
 		CartItem cartItem = new CartItem(getProductById(productId), quantity);
-        cartService.addItemToCart(username, cartItem);
+        cartService.addItemToCart(currentUser, cartItem);
     }
 
 	@DeleteMapping("/carts/{username}/{productId}/{quantity}")
     public void removeItemFromCart(@PathVariable String username, @PathVariable int productId, @PathVariable int quantity) {
 		CartItem cartItem = new CartItem(getProductById(productId), quantity);
-        cartService.removeItemFromCart(username, cartItem);
+        cartService.removeItemFromCart(currentUser, cartItem);
     }
 
 	@GetMapping("/carts/{username}")
     public List<CartItem> getCartItems(@PathVariable String username) {
-        return cartService.getCartItems(username);
+        return cartService.getCartItems(currentUser);
     }
 
-   @DeleteMapping("/carts/{userId}")
+   @DeleteMapping("/carts/{username}")
    public void clearCart(@PathVariable String username) {
-      cartService.clearCart(username);
+      cartService.clearCart(currentUser);
    }
 	
    @GetMapping("/carts/{username}")
     public double getTotalPrice(@PathVariable String username) {
-        return cartService.getTotalPrice(username);
+	   return cartService.getTotalPrice(currentUser);
     }
     
     public boolean checkout() {
@@ -87,6 +97,7 @@ public class WebshopController {
     	return checkout;
     }
     
+    @GetMapping("/login/{username}/{password}")
     public void login(String username, String password) {
     	
     	if(this.loginService.login(username, password)) {

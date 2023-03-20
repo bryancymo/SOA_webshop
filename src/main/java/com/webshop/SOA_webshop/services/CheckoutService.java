@@ -1,8 +1,11 @@
 package com.webshop.SOA_webshop.services;
 
+import java.sql.Connection;
 import java.util.List;
 
 import com.webshop.SOA_webshop.contents.CartItem;
+import com.webshop.SOA_webshop.databaseConnection.DatabaseConnection;
+
 
 public class CheckoutService {
 	

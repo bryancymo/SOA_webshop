@@ -12,30 +12,30 @@ public class Webshop {
 		this.webShopController = new WebshopController();
 	}
 	
-	public void addProduct(int id, String name, double price) {
-		Product product = new Product(id, name, price);
-		webShopController.addProduct(product);
-	}
-	
-	public void showProducts() {
-		List<Product> products = this.webShopController.getAllProducts();
-		System.out.println("Overzicht van alle products:");
-	    for (Product product : products) {
-            System.out.printf("%s - €%d", product.getName(), product.getPrice());
-        }
-	}
-	
-	public void buyProductsById(String name, int productid, int quantity) {
-		List<Product> products = this.webShopController.getAllProducts();
-		for(Product product : products) {
-			if(product.getId() == productid) {
-				CartItem cartItem = new CartItem(product, quantity);
-				this.webShopController.addItemToCart(name, productid, quantity);
-			}
-		}
-		
-
-	}
+//	public void addProduct(int id, String name, double price) {
+//		Product product = new Product(id, name, price);
+//		webShopController.addProduct(id, name, price);
+//	}
+//	
+//	public void showProducts() {
+//		List<Product> products = this.webShopController.getAllProducts();
+//		System.out.println("Overzicht van alle products:");
+//	    for (Product product : products) {
+//            System.out.printf("%s - €%d", product.getName(), product.getPrice());
+//        }
+//	}
+//	
+//	public void buyProductsById(String name, int productid, int quantity) {
+//		List<Product> products = this.webShopController.getAllProducts();
+//		for(Product product : products) {
+//			if(product.getId() == productid) {
+//				CartItem cartItem = new CartItem(product, quantity);
+//				this.webShopController.addItemToCart(name, productid, quantity);
+//			}
+//		}
+//		
+//
+//	}
 	
 	public void showCartContent(String username) {
 		List<CartItem> cartItems = webShopController.getCartItems(username);
