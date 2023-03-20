@@ -39,77 +39,77 @@ public class WebshopController {
 	public String ping() {
 		return "This works";
 	}
-	
-	@PostMapping("/products")
-	public void addProduct(@RequestBody int id, @RequestBody String productName, @RequestBody double price) {
-		Product product = new Product(id, productName, price);
-        productService.addProduct(product);
-    }
-
-	@GetMapping("/products")
-    public String getAllProducts() {
-//        return productService.getAllProducts();
-		return "hello world";
-    }
-
-	@GetMapping("products/{id}")
-    public Product getProductById(@PathVariable int id) {
-        return productService.getProductById(id);
-    }
-
-	@PostMapping("/carts/{username}/{productId}/{quantity}")
-    public void addItemToCart(@PathVariable String username, @PathVariable int productId, @PathVariable int quantity) {
-		CartItem cartItem = new CartItem(getProductById(productId), quantity);
-        cartService.addItemToCart(currentUser, cartItem);
-    }
-
-	@DeleteMapping("/carts/{username}/{productId}/{quantity}")
-    public void removeItemFromCart(@PathVariable String username, @PathVariable int productId, @PathVariable int quantity) {
-		CartItem cartItem = new CartItem(getProductById(productId), quantity);
-        cartService.removeItemFromCart(currentUser, cartItem);
-    }
-
-	@GetMapping("/carts/{username}")
-    public List<CartItem> getCartItems(@PathVariable String username) {
-        return cartService.getCartItems(currentUser);
-    }
-
-   @DeleteMapping("/carts/{username}")
-   public void clearCart(@PathVariable String username) {
-      cartService.clearCart(currentUser);
-   }
-	
-   @GetMapping("/carts/{username}")
-    public double getTotalPrice(@PathVariable String username) {
-	   return cartService.getTotalPrice(currentUser);
-    }
-    
-    public boolean checkout() {
-    	boolean checkout = checkoutService.checkout(currentUser);
-    	
-    	if(checkout) {
-    		System.out.println("De items worden zo snel mogelijk verzonden");
-    		return shippingService.shipItems(cartService.getCartItems(currentUser), currentUser);
-    	} else {
-    		System.out.println("Er zijn geen items verzonden");
-    	}
-    	
-    	return checkout;
-    }
-    
-    @GetMapping("/login/{username}/{password}")
-    public void login(String username, String password) {
-    	
-    	if(this.loginService.login(username, password)) {
-    		currentUser =  username;
-    	} else {
-    		currentUser = "";
-    	}
-    }
-    
-    public void logout() {
-    	this.loginService.logout();
-    	currentUser = "";
-    }
+//
+//	@PostMapping("/products")
+//	public void addProduct(@RequestBody int id, @RequestBody String productName, @RequestBody double price) {
+//		Product product = new Product(id, productName, price);
+//        productService.addProduct(product);
+//    }
+//
+//	@GetMapping("/products")
+//    public String getAllProducts() {
+////        return productService.getAllProducts();
+//		return "hello world";
+//    }
+//
+//	@GetMapping("products/{id}")
+//    public Product getProductById(@PathVariable int id) {
+//        return productService.getProductById(id);
+//    }
+//
+//	@PostMapping("/carts/{username}/{productId}/{quantity}")
+//    public void addItemToCart(@PathVariable String username, @PathVariable int productId, @PathVariable int quantity) {
+//		CartItem cartItem = new CartItem(getProductById(productId), quantity);
+//        cartService.addItemToCart(currentUser, cartItem);
+//    }
+//
+//	@DeleteMapping("/carts/{username}/{productId}/{quantity}")
+//    public void removeItemFromCart(@PathVariable String username, @PathVariable int productId, @PathVariable int quantity) {
+//		CartItem cartItem = new CartItem(getProductById(productId), quantity);
+//        cartService.removeItemFromCart(currentUser, cartItem);
+//    }
+//
+//	@GetMapping("/carts/{username}")
+//    public List<CartItem> getCartItems(@PathVariable String username) {
+//        return cartService.getCartItems(currentUser);
+//    }
+//
+//   @DeleteMapping("/carts/{username}")
+//   public void clearCart(@PathVariable String username) {
+//      cartService.clearCart(currentUser);
+//   }
+//
+//   @GetMapping("/carts/{username}")
+//    public double getTotalPrice(@PathVariable String username) {
+//	   return cartService.getTotalPrice(currentUser);
+//    }
+//
+//    public boolean checkout() {
+//    	boolean checkout = checkoutService.checkout(currentUser);
+//
+//    	if(checkout) {
+//    		System.out.println("De items worden zo snel mogelijk verzonden");
+//    		return shippingService.shipItems(cartService.getCartItems(currentUser), currentUser);
+//    	} else {
+//    		System.out.println("Er zijn geen items verzonden");
+//    	}
+//
+//    	return checkout;
+//    }
+//
+//    @GetMapping("/login/{username}/{password}")
+//    public void login(String username, String password) {
+//
+//    	if(this.loginService.login(username, password)) {
+//    		currentUser =  username;
+//    	} else {
+//    		currentUser = "";
+//    	}
+//    }
+//
+//    public void logout() {
+//    	this.loginService.logout();
+//    	currentUser = "";
+//    }
 
 }

@@ -36,26 +36,26 @@ public class Webshop {
 //		
 //
 //	}
-	
-	public void showCartContent(String username) {
-		List<CartItem> cartItems = webShopController.getCartItems(username);
-        System.out.println("\nCart Items:");
-        for (CartItem cartItem : cartItems) {
-            System.out.printf("%s - %d x €%.2f%n", cartItem.getProduct().getName(), cartItem.getQuantity(), cartItem.getProduct().getPrice());
-        }
-        System.out.println("Totale prijs: €" + webShopController.getTotalPrice(username));
-    }
-	
-	public void checkout() {
-		this.webShopController.checkout();
-	}
-	
-	public void login(String username, String password) {
-		this.webShopController.login(username, password);
-	}
-	
-	public void logout() {
-		this.webShopController.logout();
-	}
+//
+//	public void showCartContent(String username) {
+//		List<CartItem> cartItems = webShopController.getCartItems(username);
+//        System.out.println("\nCart Items:");
+//        for (CartItem cartItem : cartItems) {
+//            System.out.printf("%s - %d x €%.2f%n", cartItem.getProduct().getName(), cartItem.getQuantity(), cartItem.getProduct().getPrice());
+//        }
+//        System.out.println("Totale prijs: €" + webShopController.getTotalPrice(username));
+//    }
+//
+//	public void checkout() {
+//		this.webShopController.checkout();
+//	}
+//
+//	public void login(String username, String password) {
+//		this.webShopController.login(username, password);
+//	}
+//
+//	public void logout() {
+//		this.webShopController.logout();
+//	}
 
 }
